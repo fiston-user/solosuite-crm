@@ -1,0 +1,9 @@
+{
+  "build": {
+    "env": {
+      "NEXTAUTH_SECRET": "fallback-secret-for-build-only",
+      "DATABASE_URL": "postgresql://placeholder",
+      "NEXTAUTH_URL": "http://localhost:3000"
+    }
+  }
+}
