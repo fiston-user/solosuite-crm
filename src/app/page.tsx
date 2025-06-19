@@ -22,6 +22,9 @@ export default async function Home() {
             The complete freelancer CRM and invoicing solution. Manage clients, 
             track projects, and get paid faster with our all-in-one platform.
           </p>
+          <p className="text-sm text-blue-600 mb-4">
+            🚧 Development Version - Testing new features
+          </p>
           
           <div className="flex gap-4 justify-center mb-16">
             <Link href="/auth/signup">
