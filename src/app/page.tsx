@@ -23,7 +23,7 @@ export default async function Home() {
             track projects, and get paid faster with our all-in-one platform.
           </p>
           <p className="text-sm text-blue-600 mb-4">
-            🚧 Development Version - Testing new features
+            🚧 Development Version - Testing workflow deployment ✨
           </p>
           
           <div className="flex gap-4 justify-center mb-16">
