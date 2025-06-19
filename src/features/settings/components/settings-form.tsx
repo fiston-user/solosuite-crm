@@ -42,7 +42,7 @@ export function SettingsForm() {
       } else {
         setMessage('Failed to update profile')
       }
-    } catch (error) {
+    } catch {
       setMessage('An error occurred')
     } finally {
       setIsLoading(false)

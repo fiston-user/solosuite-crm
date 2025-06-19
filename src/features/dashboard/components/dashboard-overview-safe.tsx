@@ -58,9 +58,9 @@ export function DashboardOverview() {
   const safeProjects = projects || []
   const safeClients = clients || []
   const safeInvoices = recentInvoices || []
-  const safeStats = invoiceStats || { total: 0, paid: 0, paidAmount: 0, totalAmount: 0 }
+  const safeStats = invoiceStats || { total: 0, paid: 0, paidAmount: 0, totalAmount: 0, draft: 0, sent: 0, overdue: 0 }
 
-  const activeProjects = safeProjects.filter((p: any) => p.status === 'active').length
+  const activeProjects = safeProjects.filter((p) => p.status === 'active').length
   const totalClients = safeClients.length
   const recentInvoicesList = safeInvoices.slice(0, 5)
 
@@ -147,7 +147,7 @@ export function DashboardOverview() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {recentInvoicesList.map((invoice: any) => (
+                  {recentInvoicesList.map((invoice) => (
                     <TableRow key={invoice.id}>
                       <TableCell className="font-medium">{invoice.number}</TableCell>
                       <TableCell>{invoice.client?.name || 'Unknown'}</TableCell>

@@ -1,5 +1,4 @@
 import { initTRPC, TRPCError } from '@trpc/server'
-import { type FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/server/auth'
 import { db } from '@/lib/db'
@@ -18,7 +17,7 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
   }
 }
 
-export const createTRPCContext = async (opts: FetchCreateContextFnOptions) => {
+export const createTRPCContext = async () => {
   try {
     const session = await getServerSession(authOptions)
     

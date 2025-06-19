@@ -103,7 +103,7 @@ export function ProjectForm({ projectId, onSuccess, onCancel }: ProjectFormProps
                   <SelectValue placeholder="Select a client" />
                 </SelectTrigger>
                 <SelectContent>
-                  {clients?.map((client: any) => (
+                  {clients?.map((client) => (
                     <SelectItem key={client.id} value={client.id}>
                       {client.name} ({client.company || client.email})
                     </SelectItem>

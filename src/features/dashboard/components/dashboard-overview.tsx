@@ -19,7 +19,7 @@ export function DashboardOverview() {
   // Safe calculations with proper type checking
   let activeProjects = 0
   let totalClients = 0
-  let recentInvoicesList: any[] = []
+  let recentInvoicesList: unknown[] = []
 
   try {
     activeProjects = Array.isArray(projects) ? projects.filter(p => p.status === 'active').length : 0
@@ -141,11 +141,11 @@ export function DashboardOverview() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {recentInvoicesList.map((invoice) => (
+                  {recentInvoicesList.map((invoice: any) => (
                     <TableRow key={invoice.id}>
                       <TableCell className="font-medium">{invoice.number}</TableCell>
-                      <TableCell>{invoice.client.name}</TableCell>
-                      <TableCell>${invoice.amount.toFixed(2)}</TableCell>
+                      <TableCell>{invoice.client?.name || 'Unknown'}</TableCell>
+                      <TableCell>${invoice.amount?.toFixed(2) || '0.00'}</TableCell>
                       <TableCell>
                         <span className={`px-2 py-1 text-xs rounded-full ${
                           invoice.status === 'paid' 
@@ -156,7 +156,7 @@ export function DashboardOverview() {
                             ? 'bg-blue-100 text-blue-800'
                             : 'bg-gray-100 text-gray-800'
                         }`}>
-                          {invoice.status}
+                          {invoice.status || 'draft'}
                         </span>
                       </TableCell>
                     </TableRow>

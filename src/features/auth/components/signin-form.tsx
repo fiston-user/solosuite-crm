@@ -32,7 +32,7 @@ export function SignInForm() {
       } else {
         router.push('/dashboard')
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred')
     } finally {
       setIsLoading(false)
