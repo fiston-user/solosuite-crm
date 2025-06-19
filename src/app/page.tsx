@@ -39,6 +39,51 @@ export default async function Home() {
             </Link>
           </div>
 
+          {/* Waitlist Section */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl shadow-xl p-8 max-w-lg mx-auto mb-16 border border-blue-200">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500 rounded-full mb-4">
+                <span className="text-2xl">🚀</span>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Join the Beta Waitlist
+              </h3>
+              <p className="text-gray-600 text-base">
+                Be among the first to experience the future of freelancer management. 
+                Get early access and exclusive updates.
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="waitlist-email" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="waitlist-email"
+                  placeholder="your@email.com"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white"
+                />
+              </div>
+              
+              <Button className="w-full py-3 text-lg font-semibold bg-blue-600 hover:bg-blue-700 transition-colors duration-200">
+                Join Waitlist 🎉
+              </Button>
+              
+              <div className="flex items-center justify-center space-x-4 pt-2">
+                <div className="flex items-center text-sm text-gray-600">
+                  <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  <span>No spam, ever</span>
+                </div>
+                <div className="flex items-center text-sm text-gray-600">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  <span>Early access</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8 mt-16">
             <div className="text-center p-6">
               <div className="text-4xl mb-4">👥</div>
