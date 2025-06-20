@@ -77,4 +77,81 @@ export const projectRouter = createTRPCRouter({
         },
       })
     }),
+
+  getProfitability: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      // Get project details
+      const project = await ctx.db.project.findFirst({
+        where: {
+          id: input.id,
+          userId: ctx.session.user.id,
+        },
+        include: {
+          client: true,
+        },
+      })
+
+      if (!project) {
+        throw new Error('Project not found')
+      }
+
+      // Get time entries for revenue calculation
+      const timeEntries = await ctx.db.timeEntry.findMany({
+        where: {
+          projectId: input.id,
+          userId: ctx.session.user.id,
+        },
+      })
+
+      // Get expenses
+      const expenses = await ctx.db.expense.findMany({
+        where: {
+          projectId: input.id,
+          userId: ctx.session.user.id,
+        },
+      })
+
+      // Calculate metrics
+      const totalHours = timeEntries.reduce((sum, entry) => sum + entry.hours, 0)
+      const timeRevenue = project.rate ? totalHours * project.rate : 0
+      
+      const totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0)
+      const businessExpenses = expenses
+        .filter(expense => !expense.isReimbursable)
+        .reduce((sum, expense) => sum + expense.amount, 0)
+      const reimbursableExpenses = expenses
+        .filter(expense => expense.isReimbursable)
+        .reduce((sum, expense) => sum + expense.amount, 0)
+      const billableExpenses = expenses
+        .filter(expense => expense.isBillable)
+        .reduce((sum, expense) => sum + expense.amount, 0)
+
+      // Calculate profit
+      const totalRevenue = timeRevenue + billableExpenses
+      const totalCosts = businessExpenses
+      const profit = totalRevenue - totalCosts
+      const profitMargin = totalRevenue > 0 ? (profit / totalRevenue) * 100 : 0
+
+      return {
+        project,
+        timeMetrics: {
+          totalHours,
+          timeRevenue,
+          hourlyRate: project.rate || 0,
+        },
+        expenseMetrics: {
+          totalExpenses,
+          businessExpenses,
+          reimbursableExpenses,
+          billableExpenses,
+        },
+        profitability: {
+          totalRevenue,
+          totalCosts,
+          profit,
+          profitMargin,
+        },
+      }
+    }),
 })
